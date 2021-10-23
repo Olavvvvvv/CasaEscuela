@@ -1,4 +1,6 @@
 from datetime import datetime as dt
+from numpy import random as r
+import pandas as pd
 import time
 import random
 import sys
@@ -51,14 +53,56 @@ def generate_alarm_times(n, rtime, btime='10:00:00', etime='03:00:00'):
     return times
 
 
-def generate_prompt():
+def generate_prompt(cache):
     '''
     Generate a prompt, probably have it sent to the tablet as well
     '''
-    pass
+    time = lambda x: dt.strptime(x, '%H:%M:%S').time()
+    people = ('Emma;ze;haar',
+              'Dylan;hij;zijn',
+              'Dagmar;ze;haar',
+              'Olav;hij;zijn',
+              'Sonja;ze;haar',
+              'Floris;hij;zijn',
+              'Bas;hij;zijn',
+              'Wendel;ze;haar')
+
+    variables = ['X', 'Y', 'Z', 'W']
+
+    with open('prompts.csv', 'r', encoding='utf8') as f:
+        df = f.readlines()[1:]
+    
+    id_not_in_cache = False  # used to check if prompt id was generated before
+
+    while not id_not_in_cache:
+        prompt = r.choice(df)  # randomly select a prompt
+        prompt = prompt.rstrip().split(';')  # split into columns
+        
+        if dt.now().time() < time('11:30:00') and prompt[3]:
+            # check if it is a morning-only prompt, and only keep it if it is before 11:30
+            continue
+
+        if prompt[0] not in cache:  # check if id in cache
+            id_not_in_cache = True
+            cache.append(prompt[0])  # if not, add to cache
+
+    ptext = prompt[1]
+    pvalency = int(prompt[2])  # number of people that are part of the prompt
+
+    victims = r.choice(people, size=pvalency, replace=False)
+    for victim, var in zip(victims, variables[:pvalency]):
+        name = victim.split(';')[0]
+        rel = victim.split(';')[1]
+        pos = victim.split(';')[2]
+        ptext = ptext.replace(f'{var}_rel', rel)  # insert appropriate pronoun
+        ptext = ptext.replace(f'{var}_pos', pos)  # insert appropriate pos.prn.
+        ptext = ptext.replace(var, name)
+
+    return cache, ptext
 
 
-def check_times(alarm_times):
+
+def check_times(cache, alarm_times):
     '''
     :list alarm_times: list of alarm times
     check every second whether an alarm should be sounded or not
@@ -67,7 +111,8 @@ def check_times(alarm_times):
     c2 = 0  # counts the number of seconds
     while c1 < len(alarm_times):  # while not all prompts have happened
         if c2 in alarm_times:  # if the current second is in alarm_times
-            generate_prompt()
+            cache, ptext = generate_prompt(cache)
+            print(f"[{dt.now().strftime('%H:%M:%S')}] {ptext}")
             c1 += 1  # update the number of prompts
         c2 += 1  # update the seconds
         time.sleep(1)  # wait another second
@@ -81,19 +126,20 @@ def main(n, rtime, d=3, btime='10:00:00', etime='03:00:00'):
     :str btime: time in hh:mm:ss format from when the thing starts
     :str btime: time in hh:mm:ss format until when the thing goes
     '''
+    cache = []
     for _ in range(d):  # repeat for each day
         wait(btime)  # wait until the starting time
         print(f"[{dt.now().strftime('%H:%M:%S')}] Go!")
         # generate new random times for that day:
         times = generate_alarm_times(n, rtime, btime=btime, etime=etime)
-        check_times(times)  # and check them
+        check_times(cache, times)  # and check them
 
 
 if __name__ == '__main__':
-    n = int(sys.argv[1])
-    rtime = int(sys.argv[2])
-    d = int(sys.argv[3])
-    btime = sys.argv[4]
-    etime = sys.argv[5]
+    n = int(sys.argv[1])  # number of prompts
+    rtime = int(sys.argv[2])  # minimum amount of time between prompts
+    d = int(sys.argv[3])  # number of days the thing is repeated
+    btime = sys.argv[4]  # start time
+    etime = sys.argv[5]  # end time
 
     main(n, rtime, d=d, btime=btime, etime=etime)
