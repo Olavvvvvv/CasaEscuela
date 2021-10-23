@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rugged-shell-329919",
+  "private_key_id": "19b4e3670f7ed513360e5ec1ca439e7ac19ccf73",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDIC02+4CfSvHKX\nbd3OnM8TcpQSIXMU3yNyAd4FsEW7WmcI8RTzgNvuNiHdpbUERp/gj995+i+z6Tck\nTjGneYfnenJYObzX7X6GveWVEBLrSOUu9bSTeKOw6HOka2ylo0P+mQ9Lvl4SF+sD\nZaWzv0Y78ePCQSZWiDuiTohNxEseVtCJmnxljxzxCOgEXYyGBzxAVXMjogul53yS\n9f7bJe+u2qh1VdIx08SeyDjfbfqZKVgEduyvUPN36oP5mlP1BBeEvEOUB8sNYJhP\ndzb82JcAIMtlqTfrzJ0E90sASQFN2mWrsSjo+OLvHfFO+C6rY47kEd73byiwpJA0\nFUrGKwJTAgMBAAECggEANz+H9VOLLBSHwXLCc7GzLzfR1UAPvI/0BiSl4QRR/fB1\nzG5ozuej1iJ1L/X4DHpE5YxWuCV0z0d1xz0hUZOrCS80LVGk6i3ZZ/VCVuzdjMXR\nJisN+Dy1WMKaTaqtkwGIYeR76Ptml7CrY4DLRt1o1F11/cxofjWZ4rW1x2STKolq\nRY6tek21P3/EazFX2p+L262aQEbIerctGrFe5dhU9DepsqwAfiT/F0evhqfv4tpk\n2ZuQtM01KgpFnMoLJQ+dBMpe4CPPSUAajCY7jPWOEVljhk1e7SPALxq9lqZFN2B+\nCCt4lQk5Xhdt1bTzCpkiWabq/yjjpV5K30YtaaVcYQKBgQDxNbBxB9mvPOU9oD+6\nwUA11EqhPwlbzC1rRwU3zTKdqMmEmQmB82xuRxT2P/VMxmDDIfwtgJxkIj3IHq1y\ni7jbmidzE+D2PPqee3hXguTs7G5MpDkUWCb2GPGx57msx1/WpoLAFe6hSGC0//S9\numEVBKH3miwcAarrhkVJtR9plQKBgQDUT25xTLD3Ka/by5+AeLFvYP1T7m0AKks9\nkW+J6JDI0pNKhkfbGqChPlDH4Sl+xTrdzy6CE6K2CtWkY9c2oBNdko9U2YBloUfE\nlnzs5V8OgygobVsE7zQWj0+zcKYEu1oQn41Uu7SugrCe2HNHTxc5vADlL2GsXJM9\naH5p9VdSRwKBgQCZDOgX0FNfzdPndnb5mQWVIk74YXceuD9ZgobdEWa8gwzbBf/y\nZPK4RoIWfh63yGg9aKMKfEC/iLqK8Gw98kopjXbanhJwK+EaDl4dqQB5FMwn9UwC\njKysGsfBirdV2mwFV0I/f6say0IRlxdEC67uFzJuWXUDkEtThq8QRczYwQKBgQDE\n49jvV4jx3gYJlp+Xu9YJDXBBKuaI9bALK9m9kiDbLHWN8lOm/N2kSy8M/mHF/9Bk\nrWNbHCyUGB4isrh+Hxt2dplXvdFV7qioxkqaQujRg451V1zGibLLjSIDrd84miqf\nKegegWjBQc/br63QnqdSUmieIj+5YazmkQZS60SMtwKBgQDq9tzJIGJiglaO+8vw\ncmpoasOaR7MbBzuTXdPDFI6KzrFWFbNjMCjegwBdyv3+vVqKkR9QuNcs7kIBL/m8\ng2nPwYm0LrLf7sX0yVMLDWd52mUZOmaBp/gMPfoH4Pz48aWm1/wudrN/I5GiKnxa\ntDDstAobcdSA/pZtTs0kEtcGJQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "olav-102@rugged-shell-329919.iam.gserviceaccount.com",
+  "client_id": "101976637893757575214",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/olav-102%40rugged-shell-329919.iam.gserviceaccount.com"
+}
