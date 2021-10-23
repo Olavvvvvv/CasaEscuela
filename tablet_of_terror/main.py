@@ -101,7 +101,6 @@ def generate_prompt(cache):
     return cache, ptext
 
 
-
 def check_times(cache, alarm_times):
     '''
     :list alarm_times: list of alarm times
