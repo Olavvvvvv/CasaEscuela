@@ -97,6 +97,9 @@ def generate_prompt(cache):
         ptext = ptext.replace(f'{var}_rel', rel)  # insert appropriate pronoun
         ptext = ptext.replace(f'{var}_pos', pos)  # insert appropriate pos.prn.
         ptext = ptext.replace(var, name)
+        if 'LETTER' in ptext:
+            letter = r.choice([letter for letter in 'ABDEFGHKLMNOPRSTVZ'])
+            ptext = ptext.replace('LETTER', letter)
 
     return cache, ptext
 
