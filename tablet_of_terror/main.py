@@ -67,7 +67,7 @@ def generate_prompt(cache):
               'Bas;hij;zijn',
               'Wendel;ze;haar')
 
-    variables = ['X', 'Y', 'Z', 'W']
+    variables = ['X', 'Y', 'Z', 'Q']
 
     with open('prompts.csv', 'r', encoding='utf8') as f:
         df = f.readlines()[1:]
