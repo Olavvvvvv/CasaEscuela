@@ -67,7 +67,7 @@ def generate_prompt(cache):
               'Bas;hij;zijn',
               'Wendel;ze;haar')
 
-    variables = ['X', 'Y', 'Z', 'W']
+    variables = ['X', 'Y', 'Z', 'Q']
 
     with open('prompts.csv', 'r', encoding='utf8') as f:
         df = f.readlines()[1:]
@@ -97,9 +97,11 @@ def generate_prompt(cache):
         ptext = ptext.replace(f'{var}_rel', rel)  # insert appropriate pronoun
         ptext = ptext.replace(f'{var}_pos', pos)  # insert appropriate pos.prn.
         ptext = ptext.replace(var, name)
+        if 'LETTER' in ptext:
+            letter = r.choice([letter for letter in 'ABDEFGHKLMNOPRSTVZ'])
+            ptext = ptext.replace('LETTER', letter)
 
     return cache, ptext
-
 
 
 def check_times(cache, alarm_times):
