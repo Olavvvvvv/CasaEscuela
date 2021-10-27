@@ -4,7 +4,10 @@ import pandas as pd
 import time
 import random
 import sys
+from googleapiclient.discovery import build
+from google.oauth2 import service_account
 
+from utils import retrieve_data
 
 def wait(wtime, verbose=False):
     '''
@@ -72,6 +75,8 @@ def generate_prompt(cache):
     with open('prompts.csv', 'r', encoding='utf8') as f:
         df = f.readlines()[1:]
     
+
+
     id_not_in_cache = False  # used to check if prompt id was generated before
 
     while not id_not_in_cache:
@@ -136,6 +141,7 @@ def main(n, rtime, d=3, btime='10:00:00', etime='03:00:00'):
         times = generate_alarm_times(n, rtime, btime=btime, etime=etime)
         check_times(cache, times)  # and check them
 
+data_from_sheet = retrieve_data()
 
 if __name__ == '__main__':
     n = int(sys.argv[1])  # number of prompts
