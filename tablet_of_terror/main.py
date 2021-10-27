@@ -83,8 +83,11 @@ def generate_prompt(cache):
         prompt = r.choice(df)  # randomly select a prompt
         prompt = prompt.rstrip().split(';')  # split into columns
         
-        if dt.now().time() < time('11:30:00') and prompt[3]:
+        if dt.now().time() < time('11:30:00') and not int(prompt[3]):
             # check if it is a morning-only prompt, and only keep it if it is before 11:30
+            continue
+        elif dt.now().time() > time('11:30:00') and int(prompt[3]):
+            # if it is not a morning-only prompt and it is before 11:30, continue
             continue
 
         if prompt[0] not in cache:  # check if id in cache
