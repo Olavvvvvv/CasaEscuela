@@ -4,10 +4,7 @@ import pandas as pd
 import time
 import random
 import sys
-from googleapiclient.discovery import build
-from google.oauth2 import service_account
-
-from utils import retrieve_data
+from utils import *
 
 def wait(wtime, verbose=False):
     '''
@@ -72,10 +69,8 @@ def generate_prompt(cache):
 
     variables = ['X', 'Y', 'Z', 'Q']
 
-    with open('prompts.csv', 'r', encoding='utf8') as f:
-        df = f.readlines()[1:]
-    
-
+    df = retrieve_data()
+    df = [';'.join(row) for row in df][1:]
 
     id_not_in_cache = False  # used to check if prompt id was generated before
 
@@ -83,10 +78,10 @@ def generate_prompt(cache):
         prompt = r.choice(df)  # randomly select a prompt
         prompt = prompt.rstrip().split(';')  # split into columns
         
-        if dt.now().time() < time('11:30:00') and not int(prompt[3]):
+        if dt.now().time() < time('15:50:00') and not int(prompt[3]):
             # check if it is a morning-only prompt, and only keep it if it is before 11:30
             continue
-        elif dt.now().time() > time('11:30:00') and int(prompt[3]):
+        elif dt.now().time() > time('15:50:00') and int(prompt[3]):
             # if it is not a morning-only prompt and it is before 11:30, continue
             continue
 
@@ -105,7 +100,7 @@ def generate_prompt(cache):
         ptext = ptext.replace(f'{var}_rel', rel)  # insert appropriate pronoun
         ptext = ptext.replace(f'{var}_pos', pos)  # insert appropriate pos.prn.
         ptext = ptext.replace(var, name)
-        if 'LETTER' in ptext:
+        if 'LETTER' in ptext:  # TODO: Fix
             letter = r.choice([letter for letter in 'ABDEFGHKLMNOPRSTVZ'])
             ptext = ptext.replace('LETTER', letter)
 
