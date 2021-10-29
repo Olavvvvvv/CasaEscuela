@@ -5,6 +5,10 @@ import time
 import random
 import sys
 from utils import *
+import smtplib, ssl
+from email_sender import send_email
+from googleapiclient.discovery import build
+from google.oauth2 import service_account
 
 def wait(wtime, verbose=False):
     '''
@@ -118,6 +122,7 @@ def check_times(cache, alarm_times):
         if c2 in alarm_times:  # if the current second is in alarm_times
             cache, ptext = generate_prompt(cache)
             print(f"[{dt.now().strftime('%H:%M:%S')}] {ptext}")
+            send_email(ptext)
             c1 += 1  # update the number of prompts
         c2 += 1  # update the seconds
         time.sleep(1)  # wait another second
