@@ -82,10 +82,10 @@ def generate_prompt(cache):
         prompt = r.choice(df)  # randomly select a prompt
         prompt = prompt.rstrip().split(';')  # split into columns
         
-        if dt.now().time() < time('15:50:00') and not int(prompt[3]):
+        if time('06:00:00') < dt.now().time() < time('11:30:00') and not int(prompt[3]):
             # check if it is a morning-only prompt, and only keep it if it is before 11:30
             continue
-        elif dt.now().time() > time('15:50:00') and int(prompt[3]):
+        elif time('06:00:00') > dt.now().time() > time('11:30:00') and int(prompt[3]):
             # if it is not a morning-only prompt and it is before 11:30, continue
             continue
 
