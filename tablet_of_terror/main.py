@@ -82,10 +82,10 @@ def generate_prompt(cache):
         prompt = r.choice(df)  # randomly select a prompt
         prompt = prompt.rstrip().split(';')  # split into columns
         
-        if dt.now().time() < time('15:50:00') and not int(prompt[3]):
+        if time('06:00:00') < dt.now().time() < time('11:30:00') and not int(prompt[3]):
             # check if it is a morning-only prompt, and only keep it if it is before 11:30
             continue
-        elif dt.now().time() > time('15:50:00') and int(prompt[3]):
+        elif time('06:00:00') > dt.now().time() > time('11:30:00') and int(prompt[3]):
             # if it is not a morning-only prompt and it is before 11:30, continue
             continue
 
@@ -122,7 +122,7 @@ def check_times(cache, alarm_times):
         if c2 in alarm_times:  # if the current second is in alarm_times
             cache, ptext = generate_prompt(cache)
             print(f"[{dt.now().strftime('%H:%M:%S')}] {ptext}")
-            send_email(ptext)
+            send_email(ptext, gebruiker='gmail')
             c1 += 1  # update the number of prompts
         c2 += 1  # update the seconds
         time.sleep(1)  # wait another second
