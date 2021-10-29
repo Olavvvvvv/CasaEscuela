@@ -14,7 +14,7 @@ def send_email(message='Enter message',gebruiker='dylano'):
     
     
     port = 465
-    reciever = 'olavpelzer@live.nl'
+    reciever = 'tabletofterror21@gmail.com'
 
     context = ssl.create_default_context()
 
@@ -24,5 +24,3 @@ def send_email(message='Enter message',gebruiker='dylano'):
         server.login(user,password)
         server.sendmail(user,reciever,message)
     print('email sent!')
-
-send_email()#,gebruiker='gmail')
