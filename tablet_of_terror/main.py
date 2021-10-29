@@ -122,7 +122,7 @@ def check_times(cache, alarm_times):
         if c2 in alarm_times:  # if the current second is in alarm_times
             cache, ptext = generate_prompt(cache)
             print(f"[{dt.now().strftime('%H:%M:%S')}] {ptext}")
-            send_email(ptext)
+            send_email(ptext, gebruiker='gmail')
             c1 += 1  # update the number of prompts
         c2 += 1  # update the seconds
         time.sleep(1)  # wait another second
