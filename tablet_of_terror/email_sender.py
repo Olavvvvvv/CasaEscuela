@@ -33,4 +33,4 @@ def send_email(opdracht='Enter message',gebruiker='dylano'):
         server.sendmail(user,reciever,message)
     print('email sent!')
 
-send_email(gebruiker='gmail')
+# send_email(gebruiker='gmail')

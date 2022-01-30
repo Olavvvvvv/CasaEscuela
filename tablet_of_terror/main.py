@@ -9,6 +9,8 @@ import smtplib, ssl
 from email_sender import send_email
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
+import requests
+
 
 def wait(wtime, verbose=False):
     '''
@@ -63,11 +65,11 @@ def generate_prompt(cache):
     '''
     time = lambda x: dt.strptime(x, '%H:%M:%S').time()
     people = ('Emma;ze;haar',
-              'Dylan;hij;zijn',
-              'Dagmar;ze;haar',
+              'Dylan;hen;hun',
+              'Koen;hij;zijn',
               'Olav;hij;zijn',
               'Sonja;ze;haar',
-              'Floris;hij;zijn',
+              'Floris;she;her',
               'Bas;hij;zijn',
               'Wendel;ze;haar')
 
@@ -82,10 +84,10 @@ def generate_prompt(cache):
         prompt = r.choice(df)  # randomly select a prompt
         prompt = prompt.rstrip().split(';')  # split into columns
         
-        if time('06:00:00') < dt.now().time() < time('11:30:00') and not int(prompt[3]):
+        if ((dt.now().time() < time('11:30:00')) and (dt.now().time() > time('06:00:00'))) and not int(prompt[3]):
             # check if it is a morning-only prompt, and only keep it if it is before 11:30
             continue
-        elif time('06:00:00') > dt.now().time() > time('11:30:00') and int(prompt[3]):
+        elif ((dt.now().time() > time('11:30:00')) or (dt.now().time() < time('06:00:00'))) and int(prompt[3]):
             # if it is not a morning-only prompt and it is before 11:30, continue
             continue
 
@@ -123,6 +125,10 @@ def check_times(cache, alarm_times):
             cache, ptext = generate_prompt(cache)
             print(f"[{dt.now().strftime('%H:%M:%S')}] {ptext}")
             send_email(ptext, gebruiker='gmail')
+            
+            # SEND REQUEST TO TOT APP
+            requests.post('https://terror.dylano.me/api/makeTerror', data={'opdracht': ptext})
+            
             c1 += 1  # update the number of prompts
         c2 += 1  # update the seconds
         time.sleep(1)  # wait another second
@@ -142,6 +148,7 @@ def main(n, rtime, d=3, btime='10:00:00', etime='03:00:00'):
         print(f"[{dt.now().strftime('%H:%M:%S')}] Go!")
         # generate new random times for that day:
         times = generate_alarm_times(n, rtime, btime=btime, etime=etime)
+        print(times)
         check_times(cache, times)  # and check them
 
 data_from_sheet = retrieve_data()

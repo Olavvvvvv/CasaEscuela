@@ -5,12 +5,11 @@ def retrieve_data():
         SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
         SERVICE_ACCOUNT_FILE = 'keys.json'
 
-        creds = None
         creds = service_account.Credentials.from_service_account_file(
                 SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
         SAMPLE_SPREADSHEET_ID = '10xs12jq5lmIO4VzvwUz5K7rAfX-cNDZ9Nj5LQfGS7Zg'
-        READING_RANGE = 'Blad1!A1:D60'
+        READING_RANGE = 'Blad1!A1:D100'
 
         service = build('sheets', 'v4', credentials=creds)
 
