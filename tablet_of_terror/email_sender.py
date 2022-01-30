@@ -14,7 +14,7 @@ def send_email(opdracht='Enter message',gebruiker='dylano'):
     
     
     port = 465
-    reciever = 'tabletofterror21@gmail.com'
+    recievers = ['tabletofterror21@gmail.com','olavpelzer@live.nl','dagmarvmul@gmail.com']
 
     context = ssl.create_default_context()
 
@@ -30,7 +30,8 @@ def send_email(opdracht='Enter message',gebruiker='dylano'):
     print('sending email...')
     with smtplib.SMTP_SSL(smtp_adres, port, context=context) as server:
         server.login(user,password)
-        server.sendmail(user,reciever,message)
+        for ontvanger in recievers:
+            server.sendmail(user,ontvanger,message)
     print('email sent!')
 
 # send_email(gebruiker='gmail')

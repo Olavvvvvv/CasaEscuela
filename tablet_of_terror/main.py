@@ -151,7 +151,6 @@ def main(n, rtime, d=3, btime='10:00:00', etime='03:00:00'):
         print(times)
         check_times(cache, times)  # and check them
 
-data_from_sheet = retrieve_data()
 
 if __name__ == '__main__':
     n = int(sys.argv[1])  # number of prompts
