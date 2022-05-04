@@ -12,6 +12,7 @@ from google.oauth2 import service_account
 import requests
 
 
+
 def wait(wtime, verbose=False):
     '''
     :str wtime: time in hh:mm:ss format, do nothing until time is reached
@@ -65,11 +66,12 @@ def generate_prompt(cache):
     '''
     time = lambda x: dt.strptime(x, '%H:%M:%S').time()
     people = ('Emma;ze;haar',
-              'Dylan;hen;hun',
-              'Koen;hij;zijn',
+              'Sofie;ze;haar',
+              'Dylan;hij;zijn',
+              'Dagmar;ze;haar',
               'Olav;hij;zijn',
               'Sonja;ze;haar',
-              'Floris;she;her',
+              'Floris;hij;zijn',
               'Bas;hij;zijn',
               'Wendel;ze;haar')
 
@@ -124,7 +126,7 @@ def check_times(cache, alarm_times):
         if c2 in alarm_times:  # if the current second is in alarm_times
             cache, ptext = generate_prompt(cache)
             print(f"[{dt.now().strftime('%H:%M:%S')}] {ptext}")
-            send_email(ptext, gebruiker='gmail')
+            # send_email(ptext, gebruiker='gmail')
             
             # SEND REQUEST TO TOT APP
             requests.post('https://terror.dylano.me/api/makeTerror', data={'opdracht': ptext})
